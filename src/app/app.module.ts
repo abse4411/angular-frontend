@@ -7,6 +7,7 @@ import { HttpClientModule, HttpRequest, HttpInterceptor, HttpHandler, HTTP_INTER
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './servicce/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
@@ -31,8 +32,11 @@ export class XhrInterceptor implements HttpInterceptor {
     HttpClientModule,
     FormsModule,
   ],
-  providers: [AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
