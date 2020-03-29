@@ -14,7 +14,10 @@ interface Greet{
 })
 export class HomeComponent implements OnInit {
   title = 'Demo';
-  greeting:Greet;
+  greeting:Greet={
+    id:null,
+    content:null
+  };
   
   constructor(
     private app: AuthService,
@@ -25,6 +28,6 @@ export class HomeComponent implements OnInit {
     this.http.get<Greet>('http://localhost:8080/resource').subscribe(data => this.greeting = data);
   }
 
-  authenticated() { return this.app.authenticated; }
+  public get authenticated():boolean { return this.app.authenticated; }
 
 }

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.app.authenticate(undefined, undefined);
+    //this.app.authenticate(undefined, undefined);
   }
 
   logout() {
