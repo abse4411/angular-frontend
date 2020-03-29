@@ -8,17 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './servicce/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { XhrInterceptor } from './interceptor/global-interceptor';
 
-@Injectable()
-export class XhrInterceptor implements HttpInterceptor {
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const xhr = req.clone({
-      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
-    });
-    return next.handle(xhr);
-  }
-}
 
 @NgModule({
   declarations: [

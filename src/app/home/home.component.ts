@@ -22,9 +22,7 @@ export class HomeComponent implements OnInit {
   ) { }
  
   ngOnInit(): void {
-    this.http.get<Greet>('http://localhost:8080/resource',{
-      withCredentials:true 
-    }).subscribe(data => this.greeting = data);
+    this.http.get<Greet>('http://localhost:8080/resource').subscribe(data => this.greeting = data);
   }
 
   authenticated() { return this.app.authenticated; }

@@ -25,16 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    const formData = new URLSearchParams();
-    formData.set('_csrf', this.cookieService.get('XSRF-TOKEN'));
-    this.http.post('http://localhost:8080/logout',
-      formData.toString(),
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        withCredentials: true
-      }).pipe(
+    this.http.post('http://localhost:8080/logout',null).pipe(
         finalize(() => {
           this.app.authenticated = false;
           this.router.navigateByUrl('/login');
