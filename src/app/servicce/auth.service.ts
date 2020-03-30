@@ -17,12 +17,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
   }
-
+s
   authenticate(credentials, callback) {
 
         if(!credentials)
             return;
-        this.http.get(this.baseUrl+'login').pipe(
+        this.http.options(this.baseUrl+'login').pipe(
             finalize(()=>{
                 let formData=new URLSearchParams();
                 formData.set('username',credentials.username);
