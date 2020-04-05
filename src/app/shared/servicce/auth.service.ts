@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
+import { JsonResult } from '../model/json-result';
 
 interface User{
     id:number,
@@ -18,8 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 s
-  authenticate(credentials, callback) {
-
+  authenticate<T>(credentials, successCallback?:()=>void,errorCallback?:(result:JsonResult<T>)=>void) {
         if(!credentials)
             return;
         this.http.options(this.baseUrl+'login').pipe(
@@ -32,15 +32,15 @@ s
                         'Content-Type':'application/x-www-form-urlencoded'
                     }
                 }).subscribe(response => {
-                    if (response) {
-                        this.authenticated = true;
-                        this.user=response;
-                        console.log(this.user);
-                    }
-                    else{
-                        this.authenticated = false;
-                    }
-                    return callback && callback();
+                    this.authenticated = true;
+                    this.user=response;
+                    console.log(this.user);
+                    return successCallback && successCallback();
+                },
+                (errorResponse:HttpErrorResponse)=>{
+                    this.authenticated = false;
+                    console.log(errorResponse);
+                    return errorCallback && errorCallback(errorResponse.error);
                 });
             })
         ).subscribe();

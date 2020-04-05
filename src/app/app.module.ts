@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpRequest, HttpInterceptor, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './servicce/auth.service';
+import { AuthService } from './shared/servicce/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { XhrInterceptor } from './interceptor/global-interceptor';
 

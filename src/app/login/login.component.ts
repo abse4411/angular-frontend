@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../servicce/auth.service';
+import { AuthService } from '../shared/servicce/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,6 +17,7 @@ interface Credentials {
 export class LoginComponent implements OnInit {
   credentials: Credentials = { username: '', password: '' };
   error: boolean = false;
+  errMsg:string;
 
   constructor(
     private app: AuthService,
@@ -27,16 +28,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.app.authenticate(this.credentials, () => {
-      this.error = false;
-      if (!this.app.authenticated) {
-        this.error = true;
-      }
-      else {
+    this.app.authenticate<object>(this.credentials, () => {
         this.router.navigateByUrl('/');
-      }
+    },
+    (result)=>{
+      this.error = true;
+      alert(result.message);
+      this.errMsg=result.message;
     });
-
-    return false;
   }
 }

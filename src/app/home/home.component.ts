@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../servicce/auth.service';
+import { AuthService } from '../shared/servicce/auth.service';
 
 interface Greet{
   id:string,
