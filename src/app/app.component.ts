@@ -11,13 +11,15 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title = 'Demo';
+  greeting = {};
   constructor(
     private app: AuthService,
     private http: HttpClient,
     private router: Router,
     private cookieService: CookieService
   ) {
-
+    http.get('http://localhost:8080/resource').subscribe(data => this.greeting = data);
   }
 
   ngOnInit(): void {
@@ -25,12 +27,12 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.http.post('http://localhost:8080/logout',null).pipe(
-        finalize(() => {
-          this.app.authenticated = false;
-          this.router.navigateByUrl('/login');
-        })
-      ).subscribe();
+    this.http.post('http://localhost:8080/logout', null).pipe(
+      finalize(() => {
+        this.app.authenticated = false;
+        this.router.navigateByUrl('/login');
+      })
+    ).subscribe();
   }
 
 }
